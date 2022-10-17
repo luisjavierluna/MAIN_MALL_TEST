@@ -2,24 +2,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90%;
+    padding: 1rem 0px 2rem 0px;
 }
 
 .mega-menu_row-group {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 90%;
+    align-items: flex-start;
     width: 100%;
 }
 
 .mega-menu__row {
-    display: flex;
-    flex-direction: column;
-    width: 10rem;
-    height: 100%;
     padding: 0px 1rem;
     border-right: 1px solid rgb(204, 204, 204);
+    width: 14rem;
+    height: 22rem;
 }
 
 .mega-menu__row:last-child {
@@ -33,12 +30,13 @@
 }
 
 .mega-menu__links {
-    padding: 0px;
+    padding: 0px 0px 0px 1rem;
 }
 
 .mega-menu__links > li {
     padding: 0px;
-    list-style: none;
+    line-height: 2rem;
+    list-style: disc;
 }
 
 .mega-menu__links > li > a {

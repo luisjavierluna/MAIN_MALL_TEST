@@ -1,9 +1,9 @@
 <div class="nav-menu-items">
     <ul>
-        <li *ngFor="let item of navMenuItems">
-            <a href="#">{{item}}</a>
+        <li *ngFor="let department of mallDepartments">
+            <a href="#">{{department.departmenName}}</a>
             <div class="mega-menu">
-                <app-mega-menu-items></app-mega-menu-items>
+                <app-mega-menu-items [departmentAreasParam]="department.departmentAreas"></app-mega-menu-items>
             </div>
         </li>
     </ul>

@@ -1,36 +1,14 @@
 <div class="mega-menu-items">
     <div class="mega-menu_row-group"  >
     
-        <div class="mega-menu__row">
-    
-            <header>PC's</header>
-            <ul class="mega-menu__links">
-                <li><a href="#">PC 1</a></li>
-                <li><a href="#">PC 2</a></li>
-                <li><a href="#">PC 3</a></li>
-                <li><a href="#">PC 4</a></li>
+        <div class="mega-menu__row" *ngFor="let area of departmentAreas">
+            <header>{{area.areaName}}</header>
+            <ul class="mega-menu__links" >
+                <li *ngFor="let subarea of area.subAreas">
+                    <a href="#">{{subarea}}</a>
+                </li>
             </ul>
         </div>
-    
-        <div class="mega-menu__row">
-            <header>Laptops</header>
-            <ul class="mega-menu__links">
-                <li><a href="#">Laptop 1</a></li>
-                <li><a href="#">Laptop 2</a></li>
-                <li><a href="#">Laptop 3</a></li>
-                <li><a href="#">Laptop 4</a></li>
-            </ul>
-        </div>
-    
-        <div class="mega-menu__row">
-            <header>PC Gamer</header>
-            <ul class="mega-menu__links">
-                <li><a href="#">PCG 1</a></li>
-                <li><a href="#">PCG 2</a></li>
-                <li><a href="#">PCG 3</a></li>
-                <li><a href="#">PCG 4</a></li>
-            </ul>
-        </div>
-    
+
     </div>
 </div>
