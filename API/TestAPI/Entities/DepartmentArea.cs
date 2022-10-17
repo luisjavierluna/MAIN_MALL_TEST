@@ -6,7 +6,7 @@ namespace TestAPI.Entities
     {
         [Key]
         public int Id { get; set; }
-        public string AreaName { get; set; }
-        public string[] SubAreas{ get; set; }
+        public string Name { get; set; }
+        public int DepartmentId { get; set; }
     }
 }
