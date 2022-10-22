@@ -2,13 +2,12 @@
 
 namespace TestAPI.Entities
 {
-    public class DepartmentSubArea
+    public class Area
     {
-        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public int AreaId { get; set; }
         public int DepartmentId { get; set; }
+        public Department Department { get; set; }
+        public ICollection<Subarea> Subareas { get; set; }
     }
 }
