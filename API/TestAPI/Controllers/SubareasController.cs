@@ -19,7 +19,15 @@ namespace TestAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetSubareas()
         {
-            IEnumerable<Subarea> subAreas = await _context.Subareas.ToListAsync();
+            var subAreas = await _context.Subareas.Select(s =>
+            new {
+                Id = s.Id,
+                Name = s.Name,
+                AreaId = s.Area.Id,
+                AreaName = s.Area.Name,
+                DepartmentId = s.Department.Id,
+                DepartmentName = s.Department.Name
+            }).ToListAsync();
 
             return Ok(subAreas);
         }
