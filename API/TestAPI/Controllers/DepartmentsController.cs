@@ -19,7 +19,25 @@ namespace TestAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetDepartments()
         {
-            var departments = await _context.Departments.ToListAsync();
+            var departments = await _context.Departments
+                .Select(x =>
+                new
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Areas = x.Areas.Select(x =>
+                    new
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        Subareas = x.Subareas.Select(x =>
+                        new
+                        {
+                            Id = x.Id,
+                            Name = x.Name
+                        })
+                    })
+                }).ToListAsync();
 
             return Ok(departments);
         }

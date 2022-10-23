@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { area } from '../area';
+import { area } from '../../models/area';
 
 @Component({
   selector: 'app-mega-menu-items',
