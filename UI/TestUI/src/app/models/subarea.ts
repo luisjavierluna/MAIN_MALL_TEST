@@ -1,4 +1,4 @@
-export interface subareas {
+export interface subarea {
     id: number
     name: string
     areaId: number
