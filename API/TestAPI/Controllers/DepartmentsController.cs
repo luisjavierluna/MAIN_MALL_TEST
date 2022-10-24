@@ -30,12 +30,6 @@ namespace TestAPI.Controllers
                     {
                         Id = x.Id,
                         Name = x.Name,
-                        Subareas = x.Subareas.Select(x =>
-                        new
-                        {
-                            Id = x.Id,
-                            Name = x.Name
-                        })
                     })
                 }).ToListAsync();
 

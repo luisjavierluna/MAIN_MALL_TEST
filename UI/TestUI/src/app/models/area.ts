@@ -5,5 +5,5 @@ export interface area{
     name: string
     departmentId: number
     departmentName: string
-    subareas: subarea[]
+    // subareas: subarea[]
 }
