@@ -16,4 +16,8 @@ export class AreasService {
   public getAll():Observable<area[]>{
     return this.http.get<area[]>(this.apiURL)
   }
+
+  public add(area: area):Observable<area>{
+    return this.http.post<area>(this.apiURL, area)
+  }
 }

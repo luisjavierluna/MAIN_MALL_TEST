@@ -16,4 +16,8 @@ export class DepartmentsService {
   public getAll():Observable<department[]>{
     return this.http.get<department[]>(this.apiURL)
   }
+
+  public add(department: department):Observable<department>{
+    return this.http.post<department>(this.apiURL, department)
+  }
 }

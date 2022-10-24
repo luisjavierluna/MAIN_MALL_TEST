@@ -16,4 +16,8 @@ export class SubareasService {
   public getAll():Observable<subarea[]>{
     return this.http.get<subarea[]>(this.apiURL)
   }
+
+  public add(subarea: subarea):Observable<subarea>{
+    return this.http.post<subarea>(this.apiURL, subarea)
+  }
 }
