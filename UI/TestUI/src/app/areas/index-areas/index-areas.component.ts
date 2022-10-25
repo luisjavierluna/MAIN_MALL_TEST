@@ -22,7 +22,6 @@ export class IndexAreasComponent implements OnInit {
     .subscribe({
       next: response => {
         this.areas = response
-        console.log(response)
       },
       error: error => console.log(error)
     })

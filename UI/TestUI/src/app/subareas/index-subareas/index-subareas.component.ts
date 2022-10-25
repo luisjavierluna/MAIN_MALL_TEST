@@ -23,7 +23,6 @@ export class IndexSubareasComponent implements OnInit {
     .subscribe({
       next: response => {
         this.subareas = response
-        console.log(response)
       },
       error: error => console.log(error)
     })

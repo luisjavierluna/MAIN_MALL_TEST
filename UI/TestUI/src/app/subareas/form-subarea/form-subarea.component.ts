@@ -20,13 +20,17 @@ export class FormSubareaComponent implements OnInit {
   @Output()
   onSubmit: EventEmitter<subarea> = new EventEmitter<subarea>()
 
+  departmentId: number = 0
+  areaId: number = 0
+
   form: FormGroup = this.formBuiolder.group({})
   departmentsSelectListOptions: department[] = []
+  areas: area[] = []
   areasSelectListOptions: area[] = []
-
+  
   ngOnInit(): void {
-    this.getAllDepartments()
     this.getAllAreas()
+    this.getAllDepartments()
 
     this.form = this.formBuiolder.group({
       name: '',
@@ -38,19 +42,35 @@ export class FormSubareaComponent implements OnInit {
   getAllDepartments(){
     this.departmentsService.getAll()
     .subscribe({
-      next: response => {this.departmentsSelectListOptions = response}
+      next: response => {
+        this.departmentsSelectListOptions = response
+        this.setArea(this.departmentId)
+      }
     })
   }
 
   getAllAreas(){
     this.areasService.getAll()
     .subscribe({
-      next: response => {this.areasSelectListOptions = response}
+      next: response => {this.areas = response}
     })
   }
 
   saveChanges(){
     this.onSubmit.emit(this.form.value)
   }
+
+  setArea(departmentIdparam: number){
+    this.areasSelectListOptions = []
+    
+    departmentIdparam = this.form.value.departmentId
+
+    this.areas.forEach(area => {
+      if(area.departmentId == departmentIdparam){
+        this.areasSelectListOptions.push(area)
+      }
+    });
+  }
+
 
 }
