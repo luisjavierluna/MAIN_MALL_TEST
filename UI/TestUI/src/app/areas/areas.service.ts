@@ -20,4 +20,12 @@ export class AreasService {
   public add(area: area):Observable<area>{
     return this.http.post<area>(this.apiURL, area)
   }
+
+  public getById(id: number):Observable<area>{
+    return this.http.get<area>(`${this.apiURL}/${id}`)
+  }
+
+  public edit(id: number, area: area):Observable<area>{
+    return this.http.put<area>(`${this.apiURL}/${id}`, area)
+  }
 }

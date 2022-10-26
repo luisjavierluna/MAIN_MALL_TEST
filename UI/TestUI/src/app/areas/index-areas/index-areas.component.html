@@ -3,25 +3,29 @@
 <a class="btn btn-primary" routerLink="/areas/create">Create Area</a>
 
 <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Area</th>
-        <th scope="col">Department</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Area</th>
+      <th scope="col">Department</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
 
-      <tr *ngFor="let area of areas; let i = index">
-        <td scope="row">{{i + 1}}</td>
-        <td>{{area.name}}</td>
-        <td>{{area.departmentName}}</td>
-        <td>
-            <a class="btn btn-primary">Edit</a>
-            <a class="btn btn-danger">Delete</a>
-        </td>
-      </tr>
-      
-    </tbody>
-  </table>
+    <tr *ngFor="let area of areas; let i = index">
+      <td scope="row">{{i + 1}}</td>
+      <td>{{area.name}}</td>
+      <td>{{area.departmentName}}</td>
+      <td>
+        <a class="btn btn-primary" routerLink="/areas/edit/{{area.id}}">Edit</a>
+        <a class="btn btn-danger">Delete</a>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<div class="loading">
+  <div class="spinner-grow" role="status" *ngIf="areas.length <= 0"></div>
+</div>

@@ -20,4 +20,12 @@ export class DepartmentsService {
   public add(department: department):Observable<department>{
     return this.http.post<department>(this.apiURL, department)
   }
+
+  public getById(id: number):Observable<department>{
+    return this.http.get<department>(`${this.apiURL}/${id}`)
+  }
+
+  public edit(id: number, department: department):Observable<department>{
+    return this.http.put<department>(`${this.apiURL}/${id}`, department)
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DepartmentsService } from 'src/app/departments/departments.service';
 import { area } from 'src/app/models/area';
@@ -14,6 +14,9 @@ export class FormAreaComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private departmentsService: DepartmentsService) { }
+
+  @Input()
+  areaToEditParam: area = {id: 0, name: '', departmentId: 0, departmentName: ''}
 
   @Output()
   onSubmit: EventEmitter<area> = new EventEmitter<area>()

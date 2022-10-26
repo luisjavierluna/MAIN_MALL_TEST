@@ -16,6 +16,9 @@ import { CreateSubareaComponent } from './subareas/create-subarea/create-subarea
 import { FormSubareaComponent } from './subareas/form-subarea/form-subarea.component';
 import { FormAreaComponent } from './areas/form-area/form-area.component';
 import { FormDepartmentComponent } from './departments/form-department/form-department.component';
+import { EditSubareaComponent } from './subareas/edit-subarea/edit-subarea.component';
+import { EditAreaComponent } from './areas/edit-area/edit-area.component';
+import { EditDepartmentComponent } from './departments/edit-department/edit-department.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { FormDepartmentComponent } from './departments/form-department/form-depa
     CreateSubareaComponent,
     FormSubareaComponent,
     FormAreaComponent,
-    FormDepartmentComponent
+    FormDepartmentComponent,
+    EditSubareaComponent,
+    EditAreaComponent,
+    EditDepartmentComponent
   ],
   imports: [
     BrowserModule,

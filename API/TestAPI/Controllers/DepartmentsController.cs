@@ -44,5 +44,35 @@ namespace TestAPI.Controllers
 
             return Ok(department);
         }
+
+        [HttpGet("{Id:int}")]
+        public async Task<IActionResult> GetDepartment(int Id)
+        {
+            var existingDepartment = await _context.Departments.FirstOrDefaultAsync(x => x.Id == Id);
+
+            if (existingDepartment == null)
+            {
+                return NotFound("Department not found");
+            }
+
+            return Ok(existingDepartment);
+        }
+
+        [HttpPut("{Id:int}")]
+        public async Task<IActionResult> PutDepartment(int Id, [FromBody] Department newDepartment)
+        {
+            var departmentToEdit = await _context.Departments.FirstOrDefaultAsync(x => x.Id == Id);
+
+            if (departmentToEdit == null)
+            {
+                return NotFound("Department not found");
+            }
+
+            departmentToEdit.Name = newDepartment.Name;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(departmentToEdit);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TestAPI.Entities;
@@ -40,5 +41,38 @@ namespace TestAPI.Controllers
 
             return Ok(subarea);
         }
+
+        [HttpGet("{Id:int}")]
+        public async Task<IActionResult> GetSubarea(int Id)
+        {
+            var existingSubarea = await _context.Subareas.FirstOrDefaultAsync(x => x.Id == Id);
+
+            if (existingSubarea == null)
+            {
+                return NotFound("Subarea not found");
+            }
+
+            return Ok(existingSubarea);
+        }
+
+        [HttpPut("{Id:int}")]
+        public async Task<IActionResult> PutSubarea(int Id, [FromBody] Subarea newSubarea)
+        {
+            var subareaToEdit = await _context.Subareas.FirstOrDefaultAsync(x => x.Id == Id);
+
+            if (subareaToEdit == null)
+            {
+                return NotFound("Subarea not found");
+            }
+
+            subareaToEdit.Name = newSubarea.Name;
+            subareaToEdit.AreaId = newSubarea.AreaId;
+            subareaToEdit.DepartmentId = newSubarea.DepartmentId;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(subareaToEdit);
+        }
+
     }
 }

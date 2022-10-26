@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AreasService } from 'src/app/areas/areas.service';
 import { DepartmentsService } from 'src/app/departments/departments.service';
@@ -16,12 +16,12 @@ export class FormSubareaComponent implements OnInit {
   constructor(private formBuiolder: FormBuilder,
     private departmentsService: DepartmentsService,
     private areasService: AreasService) { }
-
+  
+  @Input()
+  subareaToEditParam: subarea = {id: 0, name: '', areaId: 0, areaName: '', departmentId: 0, departmentName: ''}
+  
   @Output()
   onSubmit: EventEmitter<subarea> = new EventEmitter<subarea>()
-
-  departmentId: number = 0
-  areaId: number = 0
 
   form: FormGroup = this.formBuiolder.group({})
   departmentsSelectListOptions: department[] = []
@@ -43,8 +43,10 @@ export class FormSubareaComponent implements OnInit {
     this.departmentsService.getAll()
     .subscribe({
       next: response => {
-        this.departmentsSelectListOptions = response
-        this.setArea(this.departmentId)
+        setTimeout(() => {
+          this.departmentsSelectListOptions = response
+          this.setArea(this.subareaToEditParam.areaId)
+        }, 500);
       }
     })
   }
@@ -61,15 +63,18 @@ export class FormSubareaComponent implements OnInit {
   }
 
   setArea(departmentIdparam: number){
-    this.areasSelectListOptions = []
-    
-    departmentIdparam = this.form.value.departmentId
+    setTimeout(() => {
+      this.areasSelectListOptions = []
+      
+      departmentIdparam = this.form.value.departmentId
+  
+      this.areas.forEach(area => {
+        if(area.departmentId == departmentIdparam){
+          this.areasSelectListOptions.push(area)
+        }
+      });
+    }, 500);
 
-    this.areas.forEach(area => {
-      if(area.departmentId == departmentIdparam){
-        this.areasSelectListOptions.push(area)
-      }
-    });
   }
 
 

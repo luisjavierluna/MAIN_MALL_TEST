@@ -12,18 +12,22 @@
         <th scope="col">Actions</th>
       </tr>
     </thead>
-    <tbody>
 
+    <tbody>
       <tr *ngFor="let subarea of subareas; let i = index">
         <td scope="row">{{i + 1}}</td>
         <td>{{subarea.name}}</td>
         <td>{{subarea.areaName}}</td>
         <td>{{subarea.departmentName}}</td>
         <td>
-            <a class="btn btn-primary">Edit</a>
+            <a class="btn btn-primary" routerLink="/subareas/edit/{{subarea.id}}">Edit</a>
             <a class="btn btn-danger">Delete</a>
         </td>
       </tr>
       
     </tbody>
   </table>
+
+  <div class="loading">
+    <div class="spinner-grow" role="status" *ngIf="subareas.length <= 0"></div>
+  </div>

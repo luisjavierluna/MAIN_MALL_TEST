@@ -20,4 +20,12 @@ export class SubareasService {
   public add(subarea: subarea):Observable<subarea>{
     return this.http.post<subarea>(this.apiURL, subarea)
   }
+
+  public getById(id: number):Observable<subarea>{
+    return this.http.get<subarea>(`${this.apiURL}/${id}`)
+  }
+
+  public edit(id: number, subarea: subarea):Observable<subarea>{
+    return this.http.put<subarea>(`${this.apiURL}/${id}`, subarea)
+  }
 }

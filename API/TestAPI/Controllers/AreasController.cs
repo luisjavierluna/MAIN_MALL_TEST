@@ -38,5 +38,36 @@ namespace TestAPI.Controllers
 
             return Ok(area);
         }
+
+        [HttpGet("{Id:int}")]
+        public async Task<IActionResult> GetArea(int Id)
+        {
+            var existingArea = await _context.Areas.FirstOrDefaultAsync(x => x.Id == Id);
+
+            if (existingArea == null)
+            {
+                return NotFound("Area not found");
+            }
+
+            return Ok(existingArea);
+        }
+
+        [HttpPut("{Id:int}")]
+        public async Task<IActionResult> PutArea(int Id, [FromBody] Area newArea)
+        {
+            var areaToEdit = await _context.Areas.FirstOrDefaultAsync(x => x.Id == Id);
+
+            if (areaToEdit == null)
+            {
+                return NotFound("Area not found");
+            }
+
+            areaToEdit.Name = newArea.Name;
+            areaToEdit.DepartmentId = newArea.DepartmentId;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(areaToEdit);
+        }
     }
 }
