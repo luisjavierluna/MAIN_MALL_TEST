@@ -74,5 +74,21 @@ namespace TestAPI.Controllers
             return Ok(subareaToEdit);
         }
 
+        [HttpDelete("{Id:int}")]
+        public async Task<IActionResult> DeleteSubarea(int Id)
+        {
+            var subareaToDelete = await _context.Subareas.FirstOrDefaultAsync(x => x.Id == Id);
+
+            if (subareaToDelete == null)
+            {
+                return NotFound("Subarea not found");
+            }
+
+            _context.Subareas.Remove(subareaToDelete);
+            await _context.SaveChangesAsync();
+
+            return Ok(subareaToDelete);
+        }
+
     }
 }

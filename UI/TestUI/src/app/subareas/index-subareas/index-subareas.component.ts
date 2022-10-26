@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AreasService } from 'src/app/areas/areas.service';
 import { subarea } from 'src/app/models/subarea';
 import { SubareasService } from '../subareas.service';
 
@@ -26,5 +25,16 @@ export class IndexSubareasComponent implements OnInit {
       },
       error: error => console.log(error)
     })
+  }
+
+  delete(id: number){
+    this.subareasService.delete(id)
+    .subscribe({
+      next: () => {this.reloadCurrentPage()}
+    })
+  }
+
+  reloadCurrentPage(){
+    window.location.reload()
   }
 }

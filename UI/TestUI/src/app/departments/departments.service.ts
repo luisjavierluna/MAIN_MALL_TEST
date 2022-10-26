@@ -28,4 +28,8 @@ export class DepartmentsService {
   public edit(id: number, department: department):Observable<department>{
     return this.http.put<department>(`${this.apiURL}/${id}`, department)
   }
+
+  public delete(id: number):Observable<department>{
+    return this.http.delete<department>(`${this.apiURL}/${id}`)
+  }
 }

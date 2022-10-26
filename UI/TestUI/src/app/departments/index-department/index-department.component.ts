@@ -28,4 +28,14 @@ export class IndexDepartmentComponent implements OnInit {
     })
   }
 
+  delete(id: number){
+    this.departmentsService.delete(id)
+    .subscribe({
+      next: () => {this.reloadCurrentPage()}
+    })
+  }
+
+  reloadCurrentPage(){
+    window.location.reload()
+  }
 }

@@ -26,4 +26,15 @@ export class IndexAreasComponent implements OnInit {
       error: error => console.log(error)
     })
   }
+
+  delete(id: number){
+    this.areasService.delete(id)
+    .subscribe({
+      next: () => {this.reloadCurrentPage()}
+    })
+  }
+
+  reloadCurrentPage(){
+    window.location.reload()
+  }
 }

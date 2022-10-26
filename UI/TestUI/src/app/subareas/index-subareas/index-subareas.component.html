@@ -21,7 +21,11 @@
         <td>{{subarea.departmentName}}</td>
         <td>
             <a class="btn btn-primary" routerLink="/subareas/edit/{{subarea.id}}">Edit</a>
-            <a class="btn btn-danger">Delete</a>
+            <a class="btn btn-danger"
+            [swal]="{title: 'Please confirm', 
+            text: 'Are you sure you want to delete this subarea?', showCancelButton: true}"
+            (confirm)="delete(subarea.id)"
+            >Delete</a>
         </td>
       </tr>
       

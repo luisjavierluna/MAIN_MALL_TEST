@@ -19,7 +19,11 @@
       <td>{{area.departmentName}}</td>
       <td>
         <a class="btn btn-primary" routerLink="/areas/edit/{{area.id}}">Edit</a>
-        <a class="btn btn-danger">Delete</a>
+        <a class="btn btn-danger"
+        [swal]="{title: 'Please confirm', 
+        text: 'Are you sure you want to delete this area?', showCancelButton: true}"
+        (confirm)="delete(area.id)"
+        >Delete</a>
       </td>
     </tr>
 

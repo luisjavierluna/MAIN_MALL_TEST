@@ -74,5 +74,21 @@ namespace TestAPI.Controllers
 
             return Ok(departmentToEdit);
         }
+
+        [HttpDelete("{Id:int}")]
+        public async Task<IActionResult> DeleteDepartment(int Id)
+        {
+            var departmentToDelete = await _context.Departments.FirstOrDefaultAsync(x => x.Id == Id);
+
+            if (departmentToDelete == null)
+            {
+                return NotFound("Department not found");
+            }
+
+            _context.Departments.Remove(departmentToDelete);
+            await _context.SaveChangesAsync();
+
+            return Ok(departmentToDelete);
+        }
     }
 }

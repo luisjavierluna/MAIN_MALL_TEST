@@ -28,4 +28,8 @@ export class SubareasService {
   public edit(id: number, subarea: subarea):Observable<subarea>{
     return this.http.put<subarea>(`${this.apiURL}/${id}`, subarea)
   }
+
+  public delete(id: number):Observable<subarea>{
+    return this.http.delete<subarea>(`${this.apiURL}/${id}`)
+  }
 }

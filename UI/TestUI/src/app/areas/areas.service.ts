@@ -28,4 +28,8 @@ export class AreasService {
   public edit(id: number, area: area):Observable<area>{
     return this.http.put<area>(`${this.apiURL}/${id}`, area)
   }
+
+  public delete(id: number):Observable<area>{
+    return this.http.delete<area>(`${this.apiURL}/${id}`)
+  }
 }

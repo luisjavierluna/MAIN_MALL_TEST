@@ -69,5 +69,21 @@ namespace TestAPI.Controllers
 
             return Ok(areaToEdit);
         }
+
+        [HttpDelete("{Id:int}")]
+        public async Task<IActionResult> DeleteArea(int Id)
+        {
+            var areaToDelete = await _context.Areas.FirstOrDefaultAsync(x => x.Id == Id);
+
+            if (areaToDelete == null)
+            {
+                return NotFound("Area not found");
+            }
+
+            _context.Areas.Remove(areaToDelete);
+            await _context.SaveChangesAsync();
+
+            return Ok(areaToDelete);
+        }
     }
 }
