@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { area } from '../../models/area';
+import { area, menuArea } from '../../models/area';
 
 @Component({
   selector: 'app-mega-menu-items',
@@ -11,15 +11,11 @@ export class MegaMenuItemsComponent implements OnInit {
   constructor() { }
   
   @Input()
-  departmentAreasParam: area[] = []
+  departmentAreasParam: menuArea[] = []
 
-  departmentAreas: area[] = []
 
   ngOnInit(): void {
-    if(this.departmentAreasParam.length >= 0 
-      && this.departmentAreasParam.length !== undefined) {
-        this.departmentAreas = this.departmentAreasParam
-    }
+
   }
 
 }

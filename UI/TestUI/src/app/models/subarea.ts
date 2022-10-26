@@ -6,3 +6,8 @@ export interface subarea {
     departmentId: number
     departmentName: string
 }
+
+export interface menuSubarea {
+    id: number
+    name: string
+}

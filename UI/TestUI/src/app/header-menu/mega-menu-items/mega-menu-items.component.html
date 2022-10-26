@@ -1,14 +1,14 @@
-<!-- <div class="mega-menu-items">
+<div class="mega-menu-items">
     <div class="mega-menu_row-group"  >
     
-        <div class="mega-menu__row" *ngFor="let area of departmentAreas">
-            <header>{{area.areaName}}</header>
+        <div class="mega-menu__row" *ngFor="let area of departmentAreasParam">
+            <header>{{area.name}}</header>
             <ul class="mega-menu__links" >
-                <li *ngFor="let subarea of area.subAreas">
-                    <a href="#">{{subarea}}</a>
+                <li *ngFor="let subarea of area.subareas">
+                    <a href="#">{{subarea.name}}</a>
                 </li>
             </ul>
         </div>
 
     </div>
-</div> -->
+</div>

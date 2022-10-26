@@ -36,6 +36,31 @@ namespace TestAPI.Controllers
             return Ok(departments);
         }
 
+        [HttpGet("navbarMenuItems")]
+        public async Task<IActionResult> GetAllMenuItems()
+        {
+            var departments = await _context.Departments
+                .Select(x =>
+                new
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Areas = x.Areas.Select(x =>
+                    new
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        Subareas = x.Subareas.Select(x =>
+                        new {
+                            Id = x.Id,
+                            Name = x.Name
+                        })
+                    })
+                }).ToListAsync();
+
+            return Ok(departments);
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostDepartments([FromBody] Department department)
         {
