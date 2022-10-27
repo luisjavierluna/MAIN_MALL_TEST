@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { department } from '../models/department';
+import { department, menuDepartment } from '../models/department';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,14 @@ export class DepartmentsService {
 
   private apiURL = environment.apiURL + 'departments'
 
+  private navbarMenuItemsString = 'navbarMenuItems'
+
   public getAll():Observable<department[]>{
     return this.http.get<department[]>(this.apiURL)
+  }
+
+  public getAllMenuDepartments():Observable<menuDepartment[]>{
+    return this.http.get<menuDepartment[]>(`${this.apiURL}/${this.navbarMenuItemsString}`)
   }
 
   public add(department: department):Observable<department>{
