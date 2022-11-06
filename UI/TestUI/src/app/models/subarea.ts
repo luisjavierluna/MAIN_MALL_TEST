@@ -14,11 +14,8 @@ export interface menuSubarea {
 }
 
 export interface subareaCreationDTO {
-    id: number
     name: string
-    areaId: number
-    areaName: string
-    departmentId: number
-    departmentName: string
     image: File
+    areaId: number
+    departmentId: number
 }

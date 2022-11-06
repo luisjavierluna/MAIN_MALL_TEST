@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TestAPI.DTOs;
 using TestAPI.Entities;
 
 namespace TestAPI.Controllers
@@ -11,10 +13,14 @@ namespace TestAPI.Controllers
     public class SubareasController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper mapper;
 
-        public SubareasController(ApplicationDbContext _context)
+        public SubareasController(
+            ApplicationDbContext _context,
+            IMapper mapper)
         {
             this._context = _context;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -34,12 +40,13 @@ namespace TestAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostSubarea([FromBody] Subarea subarea)
+        public async Task<IActionResult> PostSubarea([FromForm] SubareaCreationDTO subareaCreationDTO)
         {
-            await _context.Subareas.AddAsync(subarea);
-            await _context.SaveChangesAsync();
-
-            return Ok(subarea);
+            //var subarea = mapper.Map<Subarea>(subareaCreationDTO);
+            //await _context.Subareas.AddAsync(subarea);
+            //await _context.SaveChangesAsync();
+            //return Ok(subarea);
+            return NoContent();
         }
 
         [HttpGet("{Id:int}")]

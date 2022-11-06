@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { stringify } from 'querystring';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { subarea, subareaCreationDTO } from '../models/subarea';
@@ -18,7 +19,8 @@ export class SubareasService {
   }
 
   public add(subarea: subareaCreationDTO):Observable<subareaCreationDTO>{
-    return this.http.post<subareaCreationDTO>(this.apiURL, subarea)
+    const formData = this.buildFormData(subarea)
+    return this.http.post<subareaCreationDTO>(this.apiURL, formData)
   }
 
   public getById(id: number):Observable<subarea>{
@@ -31,5 +33,19 @@ export class SubareasService {
 
   public delete(id: number):Observable<subarea>{
     return this.http.delete<subarea>(`${this.apiURL}/${id}`)
+  }
+
+  private buildFormData(subarea: subareaCreationDTO): FormData {
+    const formData = new FormData()
+    formData.append('name', subarea.name)
+
+    if(subarea.image){
+      formData.append('image', subarea.image)
+    }
+
+    formData.append('areaId', subarea.areaId.toString())
+    formData.append('departmentId', subarea.departmentId.toString())
+
+    return formData
   }
 }
