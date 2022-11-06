@@ -35,6 +35,7 @@ namespace TestAPI.Controllers
             new {
                 Id = s.Id,
                 Name = s.Name,
+                Image = s.Image,
                 AreaId = s.Area.Id,
                 AreaName = s.Area.Name,
                 DepartmentId = s.Department.Id,
@@ -73,7 +74,7 @@ namespace TestAPI.Controllers
         }
 
         [HttpPut("{Id:int}")]
-        public async Task<IActionResult> PutSubarea(int Id, [FromBody] Subarea newSubarea)
+        public async Task<IActionResult> PutSubarea(int Id, [FromForm] SubareaCreationDTO subareaCreationDTO)
         {
             var subareaToEdit = await _context.Subareas.FirstOrDefaultAsync(x => x.Id == Id);
 
@@ -82,12 +83,14 @@ namespace TestAPI.Controllers
                 return NotFound("Subarea not found");
             }
 
-            subareaToEdit.Name = newSubarea.Name;
-            subareaToEdit.AreaId = newSubarea.AreaId;
-            subareaToEdit.DepartmentId = newSubarea.DepartmentId;
+            subareaToEdit = mapper.Map(subareaCreationDTO, subareaToEdit);
+
+            if (subareaCreationDTO.Image != null)
+            {
+                subareaToEdit.Image = await fileStorage.EditFile(container, subareaCreationDTO.Image, subareaToEdit.Image);
+            }
 
             await _context.SaveChangesAsync();
-
             return Ok(subareaToEdit);
         }
 

@@ -27,8 +27,9 @@ export class SubareasService {
     return this.http.get<subarea>(`${this.apiURL}/${id}`)
   }
 
-  public edit(id: number, subarea: subareaCreationDTO):Observable<subareaCreationDTO>{
-    return this.http.put<subareaCreationDTO>(`${this.apiURL}/${id}`, subarea)
+  public edit(id: number, subarea: subareaCreationDTO){
+    const formData = this.buildFormData(subarea)
+    return this.http.put(`${this.apiURL}/${id}`, formData)
   }
 
   public delete(id: number):Observable<subarea>{

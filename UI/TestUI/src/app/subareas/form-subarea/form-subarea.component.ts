@@ -23,6 +23,8 @@ export class FormSubareaComponent implements OnInit {
   @Output()
   onSubmit: EventEmitter<subareaCreationDTO> = new EventEmitter<subareaCreationDTO>()
 
+  subareaImageChanged = false
+
   form: FormGroup = this.formBuiolder.group({})
   departmentsSelectListOptions: department[] = []
   areas: area[] = []
@@ -61,10 +63,15 @@ export class FormSubareaComponent implements OnInit {
 
   
   selectedFile(file: any){
+    this.subareaImageChanged = true
     this.form.get('image')?.setValue(file)
   }
 
   saveChanges(){
+    if(!this.subareaImageChanged){
+      this.form.patchValue({'image': null})
+    }
+
     this.onSubmit.emit(this.form.value)
   }
 
