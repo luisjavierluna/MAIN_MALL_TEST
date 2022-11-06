@@ -1,5 +1,6 @@
 <h3>Edit Subarea</h3>
 
 <app-form-subarea
+*ngIf="subareaToEdit"
 [subareaToEditParam]="subareaToEdit"
 (onSubmit)="saveChanges($event)"></app-form-subarea>

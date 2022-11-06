@@ -20,6 +20,7 @@ import { FormDepartmentComponent } from './departments/form-department/form-depa
 import { EditSubareaComponent } from './subareas/edit-subarea/edit-subarea.component';
 import { EditAreaComponent } from './areas/edit-area/edit-area.component';
 import { EditDepartmentComponent } from './departments/edit-department/edit-department.component';
+import { InputImgComponent } from './utilities/input-img/input-img.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { EditDepartmentComponent } from './departments/edit-department/edit-depa
     FormDepartmentComponent,
     EditSubareaComponent,
     EditAreaComponent,
-    EditDepartmentComponent
+    EditDepartmentComponent,
+    InputImgComponent
   ],
   imports: [
     BrowserModule,

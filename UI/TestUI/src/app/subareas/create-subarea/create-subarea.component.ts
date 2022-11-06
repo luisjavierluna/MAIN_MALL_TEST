@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { subarea } from 'src/app/models/subarea';
+import { subarea, subareaCreationDTO } from 'src/app/models/subarea';
 import { SubareasService } from '../subareas.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class CreateSubareaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  saveChanges(subarea: subarea){
+  saveChanges(subarea: subareaCreationDTO){
     this.subareasService.add(subarea)
     .subscribe({
       next: () => {this.router.navigate(['/subareas'])}

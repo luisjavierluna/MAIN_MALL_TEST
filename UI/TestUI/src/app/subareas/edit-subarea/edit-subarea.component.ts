@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { department } from 'src/app/models/department';
-import { subarea } from 'src/app/models/subarea';
+import { subarea, subareaCreationDTO } from 'src/app/models/subarea';
 import { SubareasService } from '../subareas.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class EditSubareaComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router) { }
 
-  subareaToEdit: subarea = {id: 0, name: '', areaId: 0, areaName: '', departmentId: 0, departmentName: ''}
+  subareaToEdit: subarea = {id: 0, name: '', areaId: 0, areaName: '', departmentId: 0, departmentName: '', image: ''}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -28,7 +28,7 @@ export class EditSubareaComponent implements OnInit {
     })
   }
 
-  saveChanges(subarea: subarea){
+  saveChanges(subarea: subareaCreationDTO){
     this.subareasService.edit(this.subareaToEdit.id, subarea)
     .subscribe({
       next: () => {this.router.navigate(['/subareas'])}

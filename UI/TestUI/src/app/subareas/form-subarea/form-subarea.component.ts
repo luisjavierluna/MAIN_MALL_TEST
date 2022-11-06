@@ -4,7 +4,7 @@ import { AreasService } from 'src/app/areas/areas.service';
 import { DepartmentsService } from 'src/app/departments/departments.service';
 import { area } from 'src/app/models/area';
 import { department } from 'src/app/models/department';
-import { subarea } from 'src/app/models/subarea';
+import { subarea, subareaCreationDTO } from 'src/app/models/subarea';
 
 @Component({
   selector: 'app-form-subarea',
@@ -18,10 +18,10 @@ export class FormSubareaComponent implements OnInit {
     private areasService: AreasService) { }
   
   @Input()
-  subareaToEditParam: subarea = {id: 0, name: '', areaId: 0, areaName: '', departmentId: 0, departmentName: ''}
+  subareaToEditParam: subarea = {id: 0, name: '', areaId: 0, areaName: '', departmentId: 0, departmentName: '', image: ''}
   
   @Output()
-  onSubmit: EventEmitter<subarea> = new EventEmitter<subarea>()
+  onSubmit: EventEmitter<subareaCreationDTO> = new EventEmitter<subareaCreationDTO>()
 
   form: FormGroup = this.formBuiolder.group({})
   departmentsSelectListOptions: department[] = []
@@ -35,7 +35,8 @@ export class FormSubareaComponent implements OnInit {
     this.form = this.formBuiolder.group({
       name: '',
       areaId: '',
-      departmentId: ''
+      departmentId: '',
+      image: ''
     })
   }
 
@@ -58,6 +59,11 @@ export class FormSubareaComponent implements OnInit {
     })
   }
 
+  
+  selectedFile(file: any){
+    this.form.get('image')?.setValue(file)
+  }
+
   saveChanges(){
     this.onSubmit.emit(this.form.value)
   }
@@ -74,8 +80,6 @@ export class FormSubareaComponent implements OnInit {
         }
       });
     }, 500);
-
   }
-
 
 }
