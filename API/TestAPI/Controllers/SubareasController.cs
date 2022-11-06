@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TestAPI.DTOs;
 using TestAPI.Entities;
+using TestAPI.Utilities;
 
 namespace TestAPI.Controllers
 {
@@ -14,13 +15,17 @@ namespace TestAPI.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper mapper;
+        private readonly IFileStorage fileStorage;
+        private readonly string container = "subareas";
 
         public SubareasController(
             ApplicationDbContext _context,
-            IMapper mapper)
+            IMapper mapper, 
+            IFileStorage fileStorage)
         {
             this._context = _context;
             this.mapper = mapper;
+            this.fileStorage = fileStorage;
         }
 
         [HttpGet]
@@ -42,11 +47,16 @@ namespace TestAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> PostSubarea([FromForm] SubareaCreationDTO subareaCreationDTO)
         {
-            //var subarea = mapper.Map<Subarea>(subareaCreationDTO);
-            //await _context.Subareas.AddAsync(subarea);
-            //await _context.SaveChangesAsync();
-            //return Ok(subarea);
-            return NoContent();
+            var subarea = mapper.Map<Subarea>(subareaCreationDTO);
+
+            if (subareaCreationDTO.Image != null)
+            {
+                subarea.Image = await fileStorage.SaveFile(container, subareaCreationDTO.Image);
+            }
+
+            await _context.Subareas.AddAsync(subarea);
+            await _context.SaveChangesAsync();
+            return Ok(subarea);
         }
 
         [HttpGet("{Id:int}")]

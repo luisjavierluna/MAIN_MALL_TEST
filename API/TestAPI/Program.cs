@@ -1,12 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using TestAPI;
+using TestAPI.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddTransient<IFileStorage, LocalFileStorage>();
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -38,6 +43,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseCors();
 
