@@ -45,6 +45,8 @@ namespace TestAPI
 
                 subarea.Property(s => s.Name).IsRequired();
 
+                subarea.Property(s => s.Image);
+
                 subarea.HasOne(s => s.Area)
                 .WithMany(a => a.Subareas)
                 .HasForeignKey(s => s.AreaId)
