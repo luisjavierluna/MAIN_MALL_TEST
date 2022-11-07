@@ -107,6 +107,8 @@ namespace TestAPI.Controllers
             _context.Subareas.Remove(subareaToDelete);
             await _context.SaveChangesAsync();
 
+            await fileStorage.DeleteFile(subareaToDelete.Image, container);
+
             return Ok(subareaToDelete);
         }
 
